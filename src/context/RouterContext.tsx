@@ -39,13 +39,17 @@ const ROUTE_METADATA: Record<PageRoute, { title: string; description: string }> 
     title: 'Konsultasi & Kontak Resmi | Jasa Design Website',
     description: 'Mulai diskusikan kebutuhan website bisnis Anda bersama tim kami. Tersedia konsultasi langsung via WhatsApp atau formulir kebutuhan proyek.',
   },
+  '/admin': {
+    title: 'Studio Manajemen Portofolio | Jasa Design Website',
+    description: 'Panel kelola portofolio: tambah proyek baru, edit spesifikasi visual, ubah kategori, serta ekspor data kode JSON secara instan.',
+  },
 };
 
 export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const getInitialRoute = (): PageRoute => {
     if (typeof window === 'undefined') return '/';
     const path = window.location.pathname as PageRoute;
-    const validRoutes: PageRoute[] = ['/', '/layanan', '/portfolio', '/proses', '/harga', '/faq', '/kontak'];
+    const validRoutes: PageRoute[] = ['/', '/layanan', '/portfolio', '/proses', '/harga', '/faq', '/kontak', '/admin'];
     return validRoutes.includes(path) ? path : '/';
   };
 
@@ -94,7 +98,7 @@ export const RouterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   useEffect(() => {
     const handlePopState = () => {
       const path = window.location.pathname as PageRoute;
-      const validRoutes: PageRoute[] = ['/', '/layanan', '/portfolio', '/proses', '/harga', '/faq', '/kontak'];
+      const validRoutes: PageRoute[] = ['/', '/layanan', '/portfolio', '/proses', '/harga', '/faq', '/kontak', '/admin'];
       const targetRoute = validRoutes.includes(path) ? path : '/';
       setCurrentRoute(targetRoute);
       updateMetadata(targetRoute);

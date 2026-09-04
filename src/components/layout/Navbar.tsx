@@ -136,6 +136,17 @@ export const Navbar: React.FC = () => {
                   </Link>
                 );
               })}
+
+              <Link
+                to="/admin"
+                className="flex items-center justify-between py-3.5 px-3 min-h-[44px] text-sm font-mono text-emerald-400 border-b border-white/10 hover:bg-white/5 transition-colors mt-2"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full" />
+                  <span>Studio Admin (Kelola Portofolio)</span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-emerald-400" />
+              </Link>
             </nav>
           </div>
 

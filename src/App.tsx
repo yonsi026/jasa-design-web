@@ -1,10 +1,11 @@
 import React from 'react';
 import { RouterProvider, useRouter } from './context/RouterContext';
+import { PortfolioProvider } from './context/PortfolioContext';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AnalyticsToast } from './components/common/Toast';
 
-// All 7 Dedicated Pages
+// All Dedicated Pages
 import { HomePage } from './pages/HomePage';
 import { LayananPage } from './pages/LayananPage';
 import { PortfolioPage } from './pages/PortfolioPage';
@@ -12,6 +13,7 @@ import { ProsesPage } from './pages/ProsesPage';
 import { HargaPage } from './pages/HargaPage';
 import { FaqPage } from './pages/FaqPage';
 import { KontakPage } from './pages/KontakPage';
+import { AdminPage } from './pages/AdminPage';
 
 const AppContent: React.FC = () => {
   const { currentRoute } = useRouter();
@@ -32,6 +34,8 @@ const AppContent: React.FC = () => {
         return <FaqPage />;
       case '/kontak':
         return <KontakPage />;
+      case '/admin':
+        return <AdminPage />;
       default:
         return <HomePage />;
     }
@@ -58,8 +62,10 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <RouterProvider>
-      <AppContent />
-    </RouterProvider>
+    <PortfolioProvider>
+      <RouterProvider>
+        <AppContent />
+      </RouterProvider>
+    </PortfolioProvider>
   );
 }

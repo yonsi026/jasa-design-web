@@ -76,6 +76,13 @@ export const Footer: React.FC = () => {
                   Kontak
                 </Link>
               </li>
+              <li className="pt-2 border-t border-white/10 mt-2">
+                <Link to="/admin" className="text-emerald-400 hover:text-emerald-300 font-mono text-xs flex items-center gap-1.5 transition-colors">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
+                  <span>Admin Portofolio</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </Link>
+              </li>
             </ul>
           </div>
 

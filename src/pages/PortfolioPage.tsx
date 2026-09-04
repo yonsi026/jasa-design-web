@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Container } from '../components/common/Container';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { CtaBanner } from '../components/common/CtaBanner';
-import { PORTFOLIO_DATA } from '../data/websiteData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { PortfolioItem } from '../types';
 import { useRouter } from '../context/RouterContext';
-import { ArrowRight, ExternalLink, X, Check, Eye, Layers, Compass } from 'lucide-react';
+import { ArrowRight, ExternalLink, X, Check, Eye, Layers, Compass, PlusCircle } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
 const CATEGORIES: ('All' | 'Business' | 'UMKM' | 'Company' | 'Portfolio' | 'E-Commerce')[] = [
@@ -18,13 +18,14 @@ const CATEGORIES: ('All' | 'Business' | 'UMKM' | 'Company' | 'Portfolio' | 'E-Co
 ];
 
 export const PortfolioPage: React.FC = () => {
-  const { openWhatsAppConsultation } = useRouter();
+  const { navigate, openWhatsAppConsultation } = useRouter();
+  const { portfolioItems } = usePortfolio();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalItem, setActiveModalItem] = useState<PortfolioItem | null>(null);
 
   const filteredProjects = selectedCategory === 'All'
-    ? PORTFOLIO_DATA
-    : PORTFOLIO_DATA.filter((item) => item.category === selectedCategory);
+    ? portfolioItems
+    : portfolioItems.filter((item) => item.category === selectedCategory);
 
   const handleOpenModal = (project: PortfolioItem) => {
     setActiveModalItem(project);
@@ -68,26 +69,38 @@ export const PortfolioPage: React.FC = () => {
       </section>
 
       {/* Category Filters Bar */}
-      <section className="py-6 border-b border-slate-200 bg-white sticky top-20 z-20 shadow-2xs">
+      <section className="py-5 border-b border-slate-200 bg-white sticky top-20 z-20 shadow-2xs">
         <Container>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-widest mr-2 hidden sm:inline">
-              FILTER KATEGORI:
-            </span>
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors border ${
-                  selectedCategory === cat
-                    ? 'bg-[#0A1F44] text-white border-[#0A1F44]'
-                    : 'bg-[#F5F7FA] text-slate-500 hover:text-[#0A1F44] border-slate-200 hover:bg-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-widest mr-2 hidden sm:inline">
+                FILTER KATEGORI:
+              </span>
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors border ${
+                    selectedCategory === cat
+                      ? 'bg-[#0A1F44] text-white border-[#0A1F44]'
+                      : 'bg-[#F5F7FA] text-slate-500 hover:text-[#0A1F44] border-slate-200 hover:bg-white'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Quick Admin Access */}
+            <button
+              type="button"
+              onClick={() => navigate('/admin')}
+              className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-100 hover:bg-[#0A1F44] text-slate-700 hover:text-white text-[11px] font-bold uppercase tracking-wider transition-all border border-slate-300"
+            >
+              <PlusCircle className="w-3.5 h-3.5" />
+              <span>Kelola / Tambah Portofolio</span>
+            </button>
           </div>
         </Container>
       </section>

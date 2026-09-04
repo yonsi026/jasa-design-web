@@ -1,15 +1,17 @@
 import React from 'react';
 import { useRouter } from '../context/RouterContext';
+import { usePortfolio } from '../context/PortfolioContext';
 import { Container } from '../components/common/Container';
 import { SectionHeader } from '../components/common/SectionHeader';
 import { BrowserMockup } from '../components/common/BrowserMockup';
 import { CtaBanner } from '../components/common/CtaBanner';
-import { CORE_VALUES, BUSINESS_PROBLEMS, BUSINESS_SOLUTIONS, SERVICES_DATA, PORTFOLIO_DATA, PROCESS_STEPS } from '../data/websiteData';
+import { CORE_VALUES, BUSINESS_PROBLEMS, BUSINESS_SOLUTIONS, SERVICES_DATA, PROCESS_STEPS } from '../data/websiteData';
 import { ArrowRight, Check, ShieldCheck, Sparkles, Smartphone, Zap } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
 export const HomePage: React.FC = () => {
   const { navigate, openWhatsAppConsultation } = useRouter();
+  const { portfolioItems } = usePortfolio();
 
   const handleHeroConsultation = () => {
     trackEvent('hero_cta_click', { source: 'home_hero_primary' });
@@ -375,7 +377,7 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {PORTFOLIO_DATA.slice(0, 3).map((item) => (
+            {portfolioItems.slice(0, 3).map((item) => (
               <div
                 key={item.id}
                 className="bg-white border border-slate-200 hover:border-[#0A1F44] transition-all flex flex-col"

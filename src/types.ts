@@ -5,7 +5,8 @@ export type PageRoute =
   | '/proses'
   | '/harga'
   | '/faq'
-  | '/kontak';
+  | '/kontak'
+  | '/admin';
 
 export interface ServiceItem {
   id: string;
@@ -31,6 +32,8 @@ export interface PortfolioItem {
   mockupAccent: string;
   isPlaceholder: boolean;
   businessGoal: string;
+  liveUrl?: string;
+  imageUrl?: string;
 }
 
 export interface ProcessStep {
@@ -73,7 +76,7 @@ export interface ContactFormData {
 }
 
 export interface AnalyticsEvent {
-  eventName: 'hero_cta_click' | 'portfolio_view' | 'pricing_click' | 'whatsapp_click' | 'contact_form_submit' | 'navigation_click';
+  eventName: 'hero_cta_click' | 'portfolio_view' | 'pricing_click' | 'whatsapp_click' | 'contact_form_submit' | 'navigation_click' | 'portfolio_admin_update' | 'portfolio_admin_create';
   payload?: Record<string, unknown>;
   timestamp: Date;
 }
