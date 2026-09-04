@@ -1,0 +1,6 @@
+{
+  "name": "Jasa Design Website",
+  "description": "Website profesional untuk UMKM, bisnis, dan perusahaan dengan pendekatan Swiss Design System yang berorientasi pada konversi dan kredibilitas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
